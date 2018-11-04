@@ -3,8 +3,8 @@
 #define TABSTOP 8
 #define MAXLINE 1000
 
-char out [MAXLINE];
-int end;
+char out [MAXLINE]; // use array to store output string
+int end; // end index of output string
 
 int calculatespace();
 void printspace(int n);
@@ -32,7 +32,7 @@ int calculatespace() {
     int mod = end % TABSTOP;
     if (mod == 0 && end == 0)  { // tab at the biginning 
         return TABSTOP;
-    } else if (mod == 0) { // tab at the middle
+    } else if (mod == 0) { // tab in the middle
         return 0;
     } else {
         int cnt = TABSTOP - mod;
