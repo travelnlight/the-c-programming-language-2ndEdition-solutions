@@ -5,7 +5,7 @@
 
 char line[MAXLINE];
 
-int fetchline();
+int fetchLine();
 void printLine(int);
 void entab(int, int);
 int countSpace(int start);
@@ -13,16 +13,13 @@ int findNextStop(int start);
 
 main() {
     int len;
-    while ((len = fetchLine()) > 0) {
-        
+    while ((len = fetchLine()) > 0) {  
         printLine(len);
-        printf("finish");
     }
 }
 
 int fetchLine() {
     int c, i;
-    extern char line[];
 
     for (i = 0; i < MAXLINE-1 && (c = getchar()) != EOF && c != '\n'; ++i) {
         line[i] = c;
@@ -38,40 +35,33 @@ int fetchLine() {
 
 void printLine(int size) {
     int i, c;
-    for (i = 0; i < size; i++) { 
-        c = line[i];
-        if (c != ' ') putchar(c);
-        else {
-            printf("test");
+    
+    for (i = 0; i < size - 1; i++) {  
             int len = countSpace(i);
-            
             if (len == 1) putchar(c);
             else { // more than one space, entab
-                printf("before");
                 entab(i, len);
-                printf("after");
-                i = i + len - 1;
+                i = i + len - 1;   
             }
-        }
     }
 }
+
 
 int countSpace(int start) {
     int cnt;
     while (line[start] == ' ') {
-        
         cnt++;
-        start++;
-    }
+        start++; 
+    } 
     return cnt;
 }
 
 void entab(int start, int size) {
-    int end = start + size - 1;
+    int end = start + size;
     int i = start;
-    while (i < end + 1 ) {      
+    while (i < end ) {      
         int next = findNextStop(i);
-        if (next <= end + 1) {
+        if (next < end) {
             putchar('\t');
             i = next;
         } else {
